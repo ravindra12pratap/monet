@@ -6,6 +6,9 @@
     <title>Rive Animation - Monet</title>
   </head>
   <body>
+    <!-- Add an image at the top -->
+    <img src="public/monet.jpg" alt="Monet Artwork" width="100%" style="max-height: 300px; object-fit: cover;" />
+
     <canvas id="riveCanvas" width="500" height="500"></canvas>
 
     <!-- Load Rive JavaScript Library -->
@@ -16,7 +19,7 @@
 
       function initRive() {
         riveInstance = new rive.Rive({
-          src: "monet.riv", // Adjust this if necessary
+          src: "public/monet.riv", // Adjust this if necessary
           canvas: document.getElementById("riveCanvas"),
           autoplay: true,
           stateMachines: "State Machine 1", // Ensure this matches the state machine in Rive

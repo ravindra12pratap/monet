@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Rive Animation</title>
+    <title>Rive Animation - Monet</title>
   </head>
   <body>
     <canvas id="riveCanvas" width="500" height="500"></canvas>
@@ -12,19 +12,33 @@
     <script src="https://unpkg.com/@rive-app/canvas"></script>
     
     <script>
-      const r = new rive.Rive({
-        src: "https://cdn.rive.app/animations/vehicles.riv", // Replace this with your hosted .riv file URL
-        canvas: document.getElementById("riveCanvas"),
-        autoplay: true,
-        stateMachines: "bumpy",
-        onLoad: () => {
-          r.resizeDrawingSurfaceToCanvas();
-        },
-      });
+      let riveInstance; // Store the Rive instance for cleanup
 
-      // Ensure animation resizes when the window resizes
-      window.addEventListener("resize", () => {
-        r.resizeDrawingSurfaceToCanvas();
+      function initRive() {
+        riveInstance = new rive.Rive({
+          src: "public/monet.riv", // Adjust this if necessary
+          canvas: document.getElementById("riveCanvas"),
+          autoplay: true,
+          stateMachines: "State Machine 1", // Ensure this matches the state machine in Rive
+          onLoad: () => {
+            riveInstance.resizeDrawingSurfaceToCanvas();
+          },
+        });
+
+        // Handle window resizing
+        window.addEventListener("resize", () => {
+          riveInstance.resizeDrawingSurfaceToCanvas();
+        });
+      }
+
+      // Initialize Rive animation
+      initRive();
+
+      // Cleanup Rive instance when page is unloaded
+      window.addEventListener("beforeunload", () => {
+        if (riveInstance) {
+          riveInstance.cleanup(); // Prevent memory leaks
+        }
       });
     </script>
   </body>
